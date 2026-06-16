@@ -1,0 +1,22 @@
+[project]
+name = "techarchive"
+version = "1.0.0"
+description = "ТехАрхив — электронный архив технической документации (OCR чертежей по ГОСТ + структура изделия в PostgreSQL)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psycopg2-binary>=2.9.12",
+    "pyqt6>=6.11.0",
+    "sqlalchemy>=2.0.50",
+    "PyMuPDF>=1.27.0",
+    "Pillow>=10.0.0",
+    "pytesseract>=0.3.10",
+]
+
+[project.optional-dependencies]
+build = [
+    "pyinstaller>=6.0",
+]
+
+[project.scripts]
+techarchive = "app:main"

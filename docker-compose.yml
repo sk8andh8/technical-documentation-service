@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: std_postgres_container
+    environment:
+      POSTGRES_USER: std_user
+      POSTGRES_PASSWORD: std_secure_password
+      POSTGRES_DB: std_archive_db
+    ports:
+      - "5439:5432"
+    volumes:
+      # 1. Точка монтирования для автоматического создания таблиц при первом запуске
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # 2. Именованный том для сохранения данных на диске хоста (чтобы данные не пропадали при перезапуске)
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_data:
